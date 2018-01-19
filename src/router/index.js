@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import DataSource from '@/components/DataSource'
+import DataSource from 'components/DataSource'
 
 Vue.use(Router)
 

@@ -4,9 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import {store} from './store/store'
+import VueResource from 'vue-resource'
+import SuiVue from 'semantic-ui-vue';
 
 Vue.config.productionTip = false
-
+Vue.use(VueResource)
+Vue.use(SuiVue);
 /* eslint-disable no-new */
 new Vue({
   store: store,

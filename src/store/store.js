@@ -10,19 +10,61 @@ export const store = new Vuex.Store({
     selectedDataSource: {},
     dataSources: [
       {
-        id: "0",
-        type: "api",
-        name: "Yes No",
-        url: "https://yesno.wtf/api",
+        id: '0',
+        type: 'api',
+        name: 'Yes No',
+        url: 'https://yesno.wtf/api',
+        method: {
+          id: 0,
+          label: "GET",
+          description: "Get request method",
+          value: "get"
+        },
+        pollingInterval: {
+          id: 1,
+          label: "1 s",
+          value: 1000
+        },
         view:{
           highlighted: false
         }
       },
       {
-        id: "1",
-        type: "api",
-        name: "Book",
-        url: "https://api.ipify.org?format=json",
+        id: '1',
+        type: 'api',
+        name: 'My IP',
+        url: 'https://api.ipify.org?format=json',
+        method: {
+          id: 0,
+          label: "GET",
+          description: "Get request method",
+          value: "get"
+        },
+        pollingInterval: {
+          id: 1,
+          label: "1 s",
+          value: 1000
+        },
+        view:{
+          highlighted: false
+        }
+      },
+      {
+        id: '2',
+        type: 'api',
+        name: 'Weather',
+        url: 'http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22',
+        method: {
+          id: 0,
+          label: "GET",
+          description: "Get request method",
+          value: "get"
+        },
+        pollingInterval: {
+          id: 1,
+          label: "1 s",
+          value: 1000
+        },
         view:{
           highlighted: false
         }
@@ -34,7 +76,7 @@ export const store = new Vuex.Store({
       return state.dataSources;
     },
     selectedDataSource: (state) => {
-      return state.selectedDataSource;
+      return state.selectedDataSource
     }
   },
   mutations: {
@@ -48,10 +90,11 @@ export const store = new Vuex.Store({
         }
       });
     },
-    editDataSource: (state, payload) => {
+    editSelectedDataSource: (state, payload) => {
       state.dataSources.forEach( dataSource => {
         if(dataSource.id == payload){
-          state.selectedDataSource = $.extend(true, {}, dataSource)
+
+          state.selectedDataSource = JSON.parse(JSON.stringify(dataSource))
         }
       });
     }
@@ -60,8 +103,8 @@ export const store = new Vuex.Store({
     highlightDataSource: (context, payload) => {
         context.commit('highlightDataSource', payload)
     },
-    editDataSource: (context, payload) => {
-        context.commit('editDataSource', payload)
+    editSelectedDataSource: (context, payload) => {
+        context.commit('editSelectedDataSource', payload)
     }
   }
 });
